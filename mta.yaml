@@ -1,0 +1,49 @@
+ID: FxRateAggregatorService
+_schema-version: '2.1'
+version: 0.0.1
+modules:
+  - name: FX_DB
+    type: hdb
+    path: FX_DB
+    requires:
+      - name: hdi_FX_DB
+  - name: JAVA
+    type: java
+    path: JAVA
+    parameters:
+      memory: 1024M
+    provides:
+      - name: JAVA_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: hdi_FX_DB
+        properties:
+          JBP_CONFIG_RESOURCE_CONFIGURATION: '[tomcat/webapps/ROOT/META-INF/context.xml: {"service_name_for_DefaultDB" : "~{hdi-container-name}"}]'
+    build-parameters:
+      build-result: 'target/*.jar'
+  - name: UI
+    type: html5
+    path: UI
+    parameters:
+      disk-quota: 256M
+      memory: 256M
+    build-parameters:
+      builder: grunt
+    requires:
+      - name: uaa_FxRateAggregatorService
+      - name: JAVA_api
+        properties:
+          name: java_api
+          url: '~{url}'
+resources:
+  - name: hdi_FX_DB
+    properties:
+      hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
+  - name: uaa_FxRateAggregatorService
+    parameters:
+      path: ./xs-security.json
+      service-plan: application
+      service: xsuaa
+    type: org.cloudfoundry.managed-service

@@ -1,0 +1,16 @@
+namespace FxRateAggregatorService.FX_DB;
+
+context cdsArtifact {
+entity aggregator_fx_rates {
+        ID                  : Integer;
+        base_currency       : String(3);
+        to_currency         : String(3);
+        country             : String(30);
+        rate                : Double;
+        lastUpdateTimeStamp : String(30);
+        source              : String(30);
+        requested_date_time : String(30);
+    }
+};
+
+

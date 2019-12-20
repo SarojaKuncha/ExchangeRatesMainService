@@ -1,0 +1,46 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form" controllerName="UI.UI.controller.Home" displayBlock="true">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="API Configuration">
+					<content>
+						<VBox  alignItems="End">
+							<items>
+								<Label text="Get Rates from API" design="Bold"/>
+								<Select id="manualU1">
+									<items>
+										<core:Item xmlns:core="sap.ui.core" key="USDm" text="exchangeratesapi" id="USDC"/>
+										<core:Item xmlns:core="sap.ui.core" key="INRm" text="exchangeratesapi1" id="INRC"/>
+									</items>
+								</Select>
+							</items>
+						</VBox>
+						<VBox justifyContent="Center" alignItems="Center">
+							<items>
+								<f:SimpleForm editable="true" layout="ResponsiveGridLayout" width="auto" id="manual" maxContainerCols="1">
+									<f:content>
+										<!--	<Title text=""/>-->
+										<Toolbar active="ture">
+											<Label text="Manage API's"/>
+										</Toolbar>
+										<Label text="API Name" design="Bold"/>
+										<!--<Input id="baseCurrency" type="Text" value=""/>-->
+										<Input id="apiName" width="100%"/>
+										<Label text="API URL" design="Bold"/>
+										<!--	<Input id="toCurrency" type="Text" value=""/>-->
+										<Input id="apiUrl" width="100%"/>
+									</f:content>
+								</f:SimpleForm>
+								<FlexBox>
+									<items>
+										<Button type="Accept" press="onInsert" text="Add" width="130%"/>
+									</items>
+								</FlexBox>
+							</items>
+						</VBox>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
